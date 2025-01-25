@@ -2,6 +2,7 @@
 #include <iostream>  // Handles input/output operations
 #include <string>    // For string operations
 #include <ctime>     // Time manipulation for random number generation
+#include <fstream>
 #include <cstdlib>   // Provides std::srand and std::rand
 #include <algorithm> // For std::random_shuffle
 using namespace std;
@@ -70,6 +71,54 @@ void scrambleGame() {
     cout << "Yum! " << favoriteDrink << " sounds great!\n";
 }
 
+// Function to play "Guess the Teacher"
+void guessTeacherGame() {
+    const int MAX_TEACHERS = 100; // Maximum number of teacher names
+    string teachers[MAX_TEACHERS];
+    int teacherCount = 0;
+
+    ifstream file("teachers_list.txt");
+
+    if (!file.is_open()) {
+        cerr << "Error opening teachers list file." << endl;
+        return;
+    }
+
+    // Read teacher names into the array
+    while (getline(file, teachers[teacherCount]) && teacherCount < MAX_TEACHERS) {
+        teacherCount++;
+    }
+
+    file.close();
+
+    if (teacherCount == 0) {
+        cout << "No teachers found in the list!" << endl;
+        return;
+    }
+
+    // Select a random teacher
+    srand(time(0)); // Seed the random number generator
+    int randomIndex = rand() % teacherCount;
+
+    // Display the list of teachers
+    cout << "\nGuess the teacher's name from the following list:\n";
+    for (int i = 0; i < teacherCount; ++i) {
+        cout << "- " << teachers[i] << endl;
+    }
+
+    // Prompt user for a guess
+    string guess;
+    cout << "Your guess: ";
+    cin >> guess;
+
+    // Check if the guess is correct
+    if (guess == teachers[randomIndex]) {
+        cout << "Correct! The teacher is " << teachers[randomIndex] << ".\n";
+    } else {
+        cout << "Wrong! The teacher was " << teachers[randomIndex] << ".\n";
+    }
+}
+
 // Main function
 int main() {
     cout << "   Welcome to BAM Cafe   " << endl;
@@ -103,22 +152,26 @@ int main() {
     }
 
     // Game options
-    int gameChoice;
-    cout << "\nWould you like to play a game?\n";
-    cout << "1. Scramble Game\n2. Exit\n";
-    cout << "Enter your choice: ";
-    cin >> gameChoice;
+     // Main menu options
+    int choice;
+    do {
+        cout << "\nMain Menu:\n";
+        cout << "1. Play Guess the Teacher Game\n";
+        cout << "2. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
 
-    switch (gameChoice) {
-        case 1:
-            scrambleGame();
-            break;
-        case 2:
-            cout << "Thank you for visiting BAM Cafe!\n";
-            break;
-        default:
-            cout << "Invalid choice! Exiting...\n";
-    }
+        switch (choice) {
+            case 1:
+                guessTeacherGame();
+                break;
+            case 2:
+                cout << "Thank you for visiting BAM Cafe!\n";
+                break;
+            default:
+                cout << "Invalid choice! Please try again.\n";
+        }
+    } while (choice != 2);
 
     return 0;
 }
