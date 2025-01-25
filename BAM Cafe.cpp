@@ -51,8 +51,46 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
     return total;  // Return the total cost of the order
 }
 
+// Function to play a scrambled word guessing game
+void scrambleGame() {
+    // Define the original word to be scrambled
+    string word = "cafe";
+    string scrambled = word;
+
+    // Shuffle the word using a random generator
+    std::random_device rd;  // Seed for random number generator
+    std::mt19937 g(rd());   // Random number generator
+    std::shuffle(scrambled.begin(), scrambled.end(), g);  // Shuffle the letters
+
+    // Display the scrambled word to the user
+    cout << "\nScrambled word: " << scrambled << endl;
+
+    // Prompt the user to guess the original word
+    cout << "Can you guess the original word? It's something you enjoy at a cafe!\n";
+    cout << "Your guess (hint: it's 4 letters): ";
+    string guess;
+    cin >> guess;  // Read the user's guess
+
+    // Check if the user's guess is correct
+    if (guess == word) {
+        cout << "Correct! You guessed it. Well done!\n";
+    } else {
+        cout << "Wrong! The correct word was: " << word << ". Better luck next time!\n";
+    }
+
+    // Add some engagement with follow-up questions
+    cout << "What's your favorite drink at a cafe? ";
+    string favoriteDrink;
+    cin.ignore();          // Clear the input buffer
+    getline(cin, favoriteDrink);  // Read user's favorite drink
+    cout << "Yum! " << favoriteDrink << " sounds great!\n";
+}
+
 
 int main() {
+
+    cout << "   Welcome to BAM Cafe   " << endl ;
+
     MenuItem menu[4] = {
         {"Coffee", 2.5},
         {"Tea", 1.5},
@@ -61,9 +99,13 @@ int main() {
     };
     int menuSize = sizeof(menu) / sizeof(menu[0]);  // Size of menu array
 
+    // Display the menu to the user
+    displayMenu(menu, menuSize);
+
     MenuItem order[10];  // Array to store a maximum of 10 ordered items
     int orderSize = 0;   // Number of items in the order
 
+    // Place the order
     double total = placeOrder(menu, menuSize, order, orderSize);
 
     // Display the order summary
@@ -77,6 +119,26 @@ int main() {
         cout << "No items ordered.\n";
     }
 
+    // Game options
+    int gameChoice;
+    cout << "\nWould you like to play a game?\n";
+    cout << "1. Scramble Game\n2. Exit\n";
+    cout << "Enter your choice: ";
+    cin >> gameChoice;
+
+    switch (gameChoice) {
+        case 1:
+            // Play the scramble game
+            scrambleGame();
+            break;
+        case 2:
+            // Exit the program
+            cout << "Thank you for visiting Bam Cafe!\n";
+            break;
+        default:
+            // Handle invalid input
+            cout << "Invalid choice! Exiting...\n";
+    }
+
     return 0;
 }
-
