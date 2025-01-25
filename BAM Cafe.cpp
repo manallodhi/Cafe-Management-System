@@ -27,20 +27,56 @@ void displayMenu(MenuItem menu[], int size) {
     cout << endl;  // Print a new line for better formatting
 }
 
+// Function to handle order placement using arrays instead of vectors
+double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSize) {
+    int choice;            // To store the user's choice
+    double total = 0.0;    // To store the total cost of the order
+    orderSize = 0;         // To keep track of the number of items in the order
+
+    cout << "\nPlace your order (Enter 0 to finish):\n";
+    while (true) {
+        cin >> choice;     // Take the user's input
+        if (choice == 0) break;  // Exit the loop if the user enters 0
+        if (choice < 1 || choice > menuSize) {  // Check for invalid input
+            cout << "Invalid choice! Try again.\n";
+            continue;  // Skip the rest of the loop and ask for input again
+        }
+
+        // Add the selected menu item to the order array
+        order[orderSize] = menu[choice - 1];
+        total += menu[choice - 1].price;  // Add the price to the total
+        cout << menu[choice - 1].name << " added to your order.\n";
+        orderSize++;  // Increment the number of items in the order
+    }
+    return total;  // Return the total cost of the order
+}
+
+
 int main() {
-    // Creating an array of menu items with name and price details
     MenuItem menu[4] = {
-        {"Coffee", 2.5},    // Item 1: Coffee, price $2.50
-        {"Tea", 1.5},       // Item 2: Tea, price $1.50
-        {"Sandwich", 4.0},  // Item 3: Sandwich, price $4.00
-        {"Cake", 3.0}       // Item 4: Cake, price $3.00
+        {"Coffee", 2.5},
+        {"Tea", 1.5},
+        {"Sandwich", 4.0},
+        {"Cake", 3.0}
     };
+    int menuSize = sizeof(menu) / sizeof(menu[0]);  // Size of menu array
 
-    // Getting the number of menu items by dividing total size by size of one item
-    int menuSize = sizeof(menu) / sizeof(menu[0]);  // Size of the menu array
+    MenuItem order[10];  // Array to store a maximum of 10 ordered items
+    int orderSize = 0;   // Number of items in the order
 
-    // Displaying the menu using the displayMenu function
-    displayMenu(menu, menuSize);
+    double total = placeOrder(menu, menuSize, order, orderSize);
+
+    // Display the order summary
+    if (total > 0) {
+        cout << "\nOrder Summary:\n";
+        for (int i = 0; i < orderSize; ++i) {
+            cout << "- " << order[i].name << " - $" << order[i].price << "\n";
+        }
+        cout << "Total: $" << total << "\n";
+    } else {
+        cout << "No items ordered.\n";
+    }
 
     return 0;
 }
+
