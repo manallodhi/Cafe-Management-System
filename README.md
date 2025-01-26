@@ -17,19 +17,19 @@ Before running the program, make sure you have the following installed:</br>
 •	Code::Blocks or Dev-C++ (for compiling and running C++ code)</br>
 •	C++ Compiler (included with Code::Blocks or Dev-C++)</br></br>
 How to Use</br></br>
-1.	Download the Project Files:</br></br>
-o	Download the project folder containing the necessary files (e.g., .cpp, .h, .txt, etc.).</br>
-2.	Open in Code::Blocks/Dev-C++:</br></br>
+1.	Download the Project Files:</br>
+o	Download the project folder containing the necessary files (e.g., .cpp, .h, .txt, etc.).</br></br>
+2.	Open in Code::Blocks/Dev-C++:</br>
 o	Open Code::Blocks or Dev-C++.</br>
-o	Click File > Open and select the .cpp file for your project.</br>
-3.	Compile and Run:</br></br>
-o	Click on the Build and Run button or press F9 (in Code::Blocks) or use the corresponding option in Dev-C++ to compile and run the program.</br>
-4.	Output:</br></br>
-o	The program will display its output in the console window that opens after you run it.</br>
-Files Included</br></br>
+o	Click File > Open and select the .cpp file for your project.</br></br>
+3.	Compile and Run:</br>
+o	Click on the Build and Run button or press F9 (in Code::Blocks) or use the corresponding option in Dev-C++ to compile and run the program.</br></br>
+4.	Output:</br>
+o	The program will display its output in the console window that opens after you run it.</br></br>
+Files Included</br>
 •	program.cpp: Main C++ source file.</br>
 •	instructions.txt: [Optional file explaining additional instructions or data].</br></br>
-Troubleshooting</br></br>
+Troubleshooting</br>
 •	If you get an error related to the compiler, ensure that you have the correct C++ compiler installed and configured in your IDE.</br>
 •	If the program crashes or gives incorrect output, make sure all the files are in the same folder and that there are no missing dependencies.</br>
 
