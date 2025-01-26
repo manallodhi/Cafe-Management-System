@@ -62,3 +62,25 @@ Name: khalid
 Email: lame@gmail.com
 Phone: 0123456788
 Address: imaginary bangla
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: Manal 
+Email: lodhimanal8@gmail.com
+Phone: 03302823168
+Address: habibi palace
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: Manal Lodhi
+Email: lokkis5@gmail.com
+Phone: 03457899543
+Address: imaginary world habibi

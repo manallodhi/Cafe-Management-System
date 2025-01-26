@@ -1,15 +1,15 @@
 #include <iostream>  // Handles input/output operations
 #include <string>    // For string operations
 #include <ctime>     // Time manipulation for random number generation
-#include <fstream>
+#include <fstream>   // For file operations
 #include <cstdlib>   // Provides std::srand and std::rand
-#include <algorithm> // For std::random_shuffle
+#include <cctype>    // For isalpha and isdigit
 using namespace std;
 
 // Struct for Menu Item
 struct MenuItem {
-    string name; // Name of the menu item
-    double price; // Price of the menu item
+    string name;
+    double price;
 };
 
 // Structure to store user information
@@ -52,7 +52,7 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
     // Save the order to a file
     ofstream file(fileName, ios::app); // Append mode
     if (file.is_open()) {
-        file << "Order placed:\n";
+        file << "\nOrder placed:\n";
         for (int i = 0; i < orderSize; i++) {
             file << order[i].name << " - $" << order[i].price << "\n";
         }
@@ -67,14 +67,13 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
     return total;
 }
 
-
 // Function to validate the name (only alphabets and spaces)
 bool isValidName(const string &name) {
-    for (size_t i = 0; i < name.size(); i++) {
-    if (!isalpha(name[i]) && name[i] != ' ') {
-        return false;
+    for (char ch : name) {
+        if (!isalpha(ch) && ch != ' ') {
+            return false;
+        }
     }
-}
     return true;
 }
 
@@ -87,7 +86,7 @@ bool isValidEmail(const string &email) {
 bool isValidPhone(const string &phone) {
     for (char ch : phone) {
         if (!isdigit(ch)) {
-            return false;  // Invalid if it contains non-digit characters
+            return false;
         }
     }
     return true;
@@ -95,6 +94,7 @@ bool isValidPhone(const string &phone) {
 
 // Function to collect and validate user information
 void collectUserInfo(User &userInfo) {
+    cin.ignore(); // Clear input buffer
     cout << "\nPlease enter your details:\n";
 
     // Name input and validation
@@ -103,9 +103,8 @@ void collectUserInfo(User &userInfo) {
         getline(cin, userInfo.name);
         if (!isValidName(userInfo.name)) {
             cout << "Invalid name! Name should only contain alphabets.\n";
-            userInfo.name.clear();  // Clear the input to prompt the user again
         }
-    } while (userInfo.name.empty() || !isValidName(userInfo.name));
+    } while (!isValidName(userInfo.name));
 
     // Email input and validation
     do {
@@ -113,9 +112,8 @@ void collectUserInfo(User &userInfo) {
         getline(cin, userInfo.email);
         if (!isValidEmail(userInfo.email)) {
             cout << "Invalid email! Please enter a valid Gmail address.\n";
-            userInfo.email.clear();  // Clear the input to prompt the user again
         }
-    } while (userInfo.email.empty() || !isValidEmail(userInfo.email));
+    } while (!isValidEmail(userInfo.email));
 
     // Phone input and validation
     do {
@@ -123,9 +121,8 @@ void collectUserInfo(User &userInfo) {
         getline(cin, userInfo.phone);
         if (!isValidPhone(userInfo.phone)) {
             cout << "Invalid phone number! Phone should contain only digits.\n";
-            userInfo.phone.clear();  // Clear the input to prompt the user again
         }
-    } while (userInfo.phone.empty() || !isValidPhone(userInfo.phone));
+    } while (!isValidPhone(userInfo.phone));
 
     // Address input and validation
     do {
@@ -133,16 +130,9 @@ void collectUserInfo(User &userInfo) {
         getline(cin, userInfo.address);
         if (userInfo.address.empty()) {
             cout << "Address cannot be empty!\n";
-            userInfo.address.clear();  // Clear the input to prompt the user again
         }
     } while (userInfo.address.empty());
-
-    // If any field is empty, request the user to fill all fields
-    if (userInfo.name.empty() || userInfo.email.empty() || userInfo.phone.empty() || userInfo.address.empty()) {
-        cout << "\nAll fields are required! Please fill in all the information.\n";
-    }
 }
-
 
 // Function to load riddles from a file into arrays
 int loadRiddles(const string &filename, string riddles[], string answers[], int maxRiddles) {
@@ -239,16 +229,19 @@ void playTeachersGame(string hints[], string answers[], int totalTeachers) {
     } while (choice == 'y' || choice == 'Y');
 }
 
-
 // Main function
 int main() {
     cout << "   Welcome to BAM Cafe   " << endl;
 
-    MenuItem menu[4] = {
-        {"Coffee", 2.5},
-        {"Tea", 1.5},
-        {"Sandwich", 4.0},
-        {"Cake", 3.0}
+    MenuItem menu[8] = {
+        {"HUNTER BEEF SANDWICH", 1590.00},
+        {"CRISPY FRIED CHICKEN BURGER", 1460.00},
+        {"FISH & CHIPS", 1540.00},
+        {"PARMESAN CRUSTED CHICKEN", 1590.00},
+        {"BABAR PASTA", 1760.00},
+        {"PASTA ALFREDO CHICKEN", 1520.00},
+        {"PIZZA MARGARITA", 1540.00},
+        {"BAM SPECIAL CHICKEN", 1590.00}
     };
     int menuSize = sizeof(menu) / sizeof(menu[0]);
 
@@ -258,8 +251,7 @@ int main() {
     MenuItem order[10]; // Array to store a maximum of 10 ordered items
     int orderSize = 0;
 
-    // File name for storing orders
-  // File name for storing orders and customer info
+    // File name for storing orders and customer info
     string fileName = "orders.txt";
 
     // Place the order
@@ -286,16 +278,15 @@ int main() {
 
         // Display order summary
         cout << "\nOrder Summary:\n";
-        for (int i = 0; i < orderSize; i++) { // Standard for loop for compatibility
-            cout << "- " << order[i].name << " - $" << order[i].price << "\n";
+        for (int i = 0; i < orderSize; ++i) {
+            cout << order[i].name << " - $" << order[i].price << "\n";
         }
         cout << "Total: $" << total << "\n";
     } else {
-        cout << "No items ordered.\n";
+        cout << "No order placed.\n";
     }
 
-    // Game options
-    // Main menu options
+     // Main menu options
     cout << "\nWelcome to the Fun Games Menu of BAM cafe\n";
     cout << "1. Play the Riddles Game\n";
     cout << "2. Play the Guess the Teacher Game\n";
@@ -310,44 +301,48 @@ int main() {
 
         case 1: {
             const int MAX_RIDDLES = 100; // Set a maximum limit for riddles
-    string riddles[MAX_RIDDLES];
-    string answers[MAX_RIDDLES];
+            string riddles[MAX_RIDDLES];
+            string answers[MAX_RIDDLES];
 
-    string filename = "riddles.txt";
-    int totalRiddles = loadRiddles(filename, riddles, answers, MAX_RIDDLES);
+            string filename = "riddles.txt";
+            int totalRiddles = loadRiddles(filename, riddles, answers, MAX_RIDDLES);
 
-    if (totalRiddles > 0) {
-        playRiddlesGame(riddles, answers, totalRiddles);
-    } else {
-        cout << "Failed to load riddles from the file." << endl;
-    }
+            if (totalRiddles > 0) {
+                playRiddlesGame(riddles, answers, totalRiddles);
+            } else {
+                cout << "Failed to load riddles from the file." << endl;
+            }
             break;
         }
+
         case 2: {
-           const int MAX_TEACHERS = 100;
-    string hints[MAX_TEACHERS];
-    string answers[MAX_TEACHERS];
+            const int MAX_TEACHERS = 100;
+            string hints[MAX_TEACHERS];
+            string answers[MAX_TEACHERS];
 
-    int totalTeachers = loadTeachers("teachers.txt", hints, answers, MAX_TEACHERS);
-    if (totalTeachers == 0) {
-        cout << "No hints loaded. Exiting program." << endl;
-        return 1;
-    }
+            int totalTeachers = loadTeachers("teachers.txt", hints, answers, MAX_TEACHERS);
+            if (totalTeachers == 0) {
+                cout << "No hints loaded. Exiting program." << endl;
+                return 1;
+            }
 
-    cout << "Welcome to the Guess the Teacher Game!" << endl;
-    playTeachersGame(hints, answers, totalTeachers);
+            cout << "Welcome to the Guess the Teacher Game!" << endl;
+            playTeachersGame(hints, answers, totalTeachers);
 
-    cout << "Thank you for playing!" << endl;
-    cout << "Thank you for ordering fro BAM Cafe " << endl ;
-    break;
+            cout << "Thank you for playing!" << endl;
+            cout << "Thank you for ordering from BAM Cafe." << endl;
+            break;
         }
+
         case 3:
             cout << "------ Thank you for visiting BAM ------";
             break;
+
         default:
             cout << "Invalid choice! Please select a valid option.\n";
     }
 
-    return 0;
+    return 0; // End of main function
 }
+
 
