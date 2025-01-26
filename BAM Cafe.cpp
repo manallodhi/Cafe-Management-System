@@ -1,4 +1,3 @@
-
 #include <iostream>  // Handles input/output operations
 #include <string>    // For string operations
 #include <ctime>     // Time manipulation for random number generation
@@ -44,32 +43,39 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
     return total;
 }
 
-// Function to play a scrambled word guessing game
-void scrambleGame() {
-    string word = "cafe";
-    string scrambled = word;
+// Function to play a riddles guessing game
+void riddlesGame() {
+    // Array of riddles and their corresponding answers
+    const string riddles[][2] = {
+        {"I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?", "echo"},
+        {"The more of me you take, the more you leave behind. What am I?", "footsteps"},
+        {"I have keys but no locks. I have space but no room. You can enter but you can't go outside. What am I?", "keyboard"}
+    };
 
-    std::srand(std::time(0)); // Seed the random number generator
-    std::random_shuffle(scrambled.begin(), scrambled.end());
+    // Number of riddles in the array
+    const int riddleCount = sizeof(riddles) / sizeof(riddles[0]);
 
-    cout << "\nScrambled word: " << scrambled << endl;
-    cout << "Can you guess the original word? It's something you enjoy at a cafe!\n";
-    cout << "Your guess (hint: it's 4 letters): ";
-    string guess;
-    cin >> guess;
+    // Seed the random number generator
+    srand(time(0));
 
-    if (guess == word) {
-        cout << "Correct! You guessed it. Well done!\n";
+    // Select a random riddle
+    int randomIndex = rand() % riddleCount;
+
+    // Display the riddle
+    cout << "\nRiddle: " << riddles[randomIndex][0] << endl;
+    cout << "Your answer: ";
+    string userAnswer;
+    getline(cin, userAnswer); // Get the user's answer
+
+    // Check if the answer is correct (case-insensitive)
+    transform(userAnswer.begin(), userAnswer.end(), userAnswer.begin(), ::tolower);
+    if (userAnswer == riddles[randomIndex][1]) {
+        cout << "Correct! Well done!\n";
     } else {
-        cout << "Wrong! The correct word was: " << word << ". Better luck next time!\n";
+        cout << "Wrong! The correct answer was: " << riddles[randomIndex][1] << ".\n";
     }
-
-    cout << "What's your favorite drink at a cafe? ";
-    string favoriteDrink;
-    cin.ignore(); // Clear input buffer
-    getline(cin, favoriteDrink);
-    cout << "Yum! " << favoriteDrink << " sounds great!\n";
 }
+
 
 // Function to play "Guess the Teacher"
 void guessTeacherGame() {
