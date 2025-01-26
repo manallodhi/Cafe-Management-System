@@ -237,39 +237,39 @@ int main() {
    switch (choice) {
     case 1: {
         // Collect user information
-        collectUserInfo(name, email, phone, address);
+    collectUserInfo(name, email, phone, address);
 
-        // Display a thank-you message
-        cout << "\nThank you, " << name << "! Your order has been placed successfully.\n";
-        cout << "We will deliver it to " << address << ".\n";
+     // Display a thank-you message
+    cout << "\nThank you, " << name << "! Your order has been placed successfully.\n";
+    cout << "We will deliver it to " << address << ".\n";
 
         // Ask if the user wants to play a game while waiting
-        cout << "\nWould you like to play a game while your order is being prepared? (yes/no): ";
-        string playGame;
-        cin.ignore(); // Clear the input buffer
-        getline(cin, playGame);
+    cout << "\nWould you like to play a game while your order is being prepared? (yes/no): ";
+    string playGame;
+    cin.ignore(); // Clear the input buffer
+    getline(cin, playGame);
 
-        // If the user wants to play a game
-        if (playGame == "yes" || playGame == "Yes") {
-            cout << "\nWhich game would you like to play?\n";
-            cout << "1. Riddles Game\n";
-            cout << "2. Guess the Teacher Game\n";
-            cout << "Choose an option (1-2): ";
+       // If the user wants to play a game
+    if (playGame == "yes" || playGame == "Yes") {
+    cout << "\nWhich game would you like to play?\n";
+    cout << "1. Riddles Game\n";
+    cout << "2. Guess the Teacher Game\n";
+    cout << "Choose an option (1-2): ";
 
-            int gameChoice;
-            cin >> gameChoice;
-            cin.ignore(); // Clear the input buffer
+    int gameChoice;
+    cin >> gameChoice;
+    cin.ignore(); // Clear the input buffer
 
-            if (gameChoice == 1) {
-                riddlesGame(); // Call the riddles game function
-            } else if (gameChoice == 2) {
-                guessTeacherGame(); // Call the guess the teacher game function
-            } else {
-                cout << "Invalid choice! Returning to the main menu.\n";
-            }
-        } else {
-            cout << "\nAlright, enjoy your time!\n";
-        }
+    if (gameChoice == 1) {
+    riddlesGame(); // Call the riddles game function
+    } else if (gameChoice == 2) {
+      guessTeacherGame(); // Call the guess the teacher game function
+    } else {
+    cout << "Invalid choice! Returning to the main menu.\n";
+    }
+    } else {
+    cout << "\n====== Alright, enjoy your time ======\n";
+    }
         break;
     }
     case 2: {
@@ -281,7 +281,7 @@ int main() {
         break;
     }
     case 4:
-        cout << "Thank you for playing! Goodbye!\n";
+        cout << "------ Thank you for visiting BAM ------";
         break;
     default:
         cout << "Invalid choice! Please select a valid option.\n";
