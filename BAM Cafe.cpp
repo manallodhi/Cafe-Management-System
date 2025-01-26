@@ -54,11 +54,11 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
 
 // Function to validate the name (only alphabets and spaces)
 bool isValidName(const string &name) {
-    for (char ch : name) {
-        if (!isalpha(ch) && ch != ' ') {
-            return false;  // Invalid if it contains anything other than letters or spaces
-        }
+    for (size_t i = 0; i < name.size(); i++) {
+    if (!isalpha(name[i]) && name[i] != ' ') {
+        return false;
     }
+}
     return true;
 }
 
