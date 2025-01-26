@@ -3,7 +3,10 @@
 #include <ctime>     // Time manipulation for random number generation
 #include <fstream>   // For file operations
 #include <cstdlib>   // Provides std::srand and std::rand
+<<<<<<< HEAD
 #include <cctype>    // For isalpha and isdigit
+=======
+>>>>>>> e50309906f2610d6994ce9f3a89d0018a49e143b
 using namespace std;
 
 // Struct for Menu Item
