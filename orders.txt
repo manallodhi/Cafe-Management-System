@@ -1,0 +1,64 @@
+Order placed:
+Coffee - $2.5
+Total: $2.5
+---------------------
+
+--- Customer Information ---
+Name: Ayesha tahir
+Email: Ayesha.taahor.dhanoo@gmail.com
+Phone: 02345678
+Address: st 5 h 34
+Order placed:
+Coffee - $2.5
+Tea - $1.5
+Sandwich - $4
+Cake - $3
+Total: $11
+---------------------
+Order placed:
+Coffee - $2.5
+Tea - $1.5
+Total: $4
+---------------------
+Order placed:
+Coffee - $2.5
+Total: $2.5
+---------------------
+
+--- Customer Information ---
+Name: manal lodhi
+Email: lodhimfdanal8@gmail.com
+Phone: 03325567890
+Address: 33 st 4 hou
+Order placed:
+Coffee - $2.5
+Tea - $1.5
+Total: $4
+---------------------
+
+--- Customer Information ---
+Name: Omaima khan
+Email: khanomaom@gmail.com
+Phone: 0123456789
+Address: j area house 4 st 3
+Order placed:
+Tea - $1.5
+Cake - $3
+Total: $4.5
+---------------------
+
+--- Customer Information ---
+Name: manal
+Email: manal4@gmail.com
+Phone: 0654321789
+Address: tree house imaginary
+Order placed:
+Coffee - $2.5
+Total: $2.5
+---------------------
+
+--- Customer Information ---
+Name: khalid
+Email: lame@gmail.com
+Phone: 0123456788
+Address: imaginary bangla
