@@ -1,15 +1,23 @@
 #include <iostream>  // Handles input/output operations
 #include <string>    // For string operations
 #include <ctime>     // Time manipulation for random number generation
-#include <fstream>
+#include <fstream>   // For file operations
 #include <cstdlib>   // Provides std::srand and std::rand
-#include <algorithm> // For std::random_shuffle
+#include <cctype>    // For isalpha and isdigit
 using namespace std;
 
 // Struct for Menu Item
 struct MenuItem {
-    string name;   // Name of the menu item
-    double price;  // Price of the menu item
+    string name;
+    double price;
+};
+
+// Structure to store user information
+struct User {
+    string name;
+    string email;
+    string phone;
+    string address;
 };
 
 // Function to display the menu
@@ -21,8 +29,8 @@ void displayMenu(MenuItem menu[], int size) {
     cout << endl;
 }
 
-// Function to handle order placement
-double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSize) {
+// Function to handle order placement and save it to a file
+double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSize, const string &fileName) {
     int choice;
     double total = 0.0;
     orderSize = 0;
@@ -40,159 +48,203 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
         cout << menu[choice - 1].name << " added to your order.\n";
         orderSize++;
     }
+
+    // Save the order to a file
+    ofstream file(fileName, ios::app); // Append mode
+    if (file.is_open()) {
+        file << "\nOrder placed:\n";
+        for (int i = 0; i < orderSize; i++) {
+            file << order[i].name << " - $" << order[i].price << "\n";
+        }
+        file << "Total: $" << total << "\n";
+        file << "---------------------\n";
+        file.close();
+        cout << "\nOrder saved !\n";
+    } else {
+        cout << "\nError: Unable to open the file to save the order.\n";
+    }
+
     return total;
 }
-void collectUserInfo(string &name, string &email, string &phone, string &address) {
-    do {
-        cout << "\nPlease enter your details:\n";
-        cout << "Name: ";
-        getline(cin, name);
-        cout << "Email: ";
-        getline(cin, email);
-        cout << "Phone: ";
-        getline(cin, phone);
-        cout << "Address: ";
-        getline(cin, address);
 
-        if (name.empty() || email.empty() || phone.empty() || address.empty()) {
-            cout << "\nAll fields are required! Please fill in all the information.\n";
+// Function to validate the name (only alphabets and spaces)
+bool isValidName(const string &name) {
+    for (char ch : name) {
+        if (!isalpha(ch) && ch != ' ') {
+            return false;
         }
-    } while (name.empty() || email.empty() || phone.empty() || address.empty());
-}
-
-// Function to play a riddles guessing game
-void riddlesGame() {
-    // Array of riddles and their corresponding answers
-    const string riddles[][2] = {
-        {"I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?", "echo"},
-        {"The more of me you take, the more you leave behind. What am I?", "footsteps"},
-        {"I have keys but no locks. I have space but no room. You can enter but you can't go outside. What am I?", "keyboard"}
-    };
-
-    // Number of riddles in the array
-    const int riddleCount = sizeof(riddles) / sizeof(riddles[0]);
-
-    // Seed the random number generator
-    srand(time(0));
-
-    // Select a random riddle
-    int randomIndex = rand() % riddleCount;
-
-    // Display the riddle
-    cout << "\nRiddle: " << riddles[randomIndex][0] << endl;
-    cout << "Your answer: ";
-    string userAnswer;
-    cin.ignore();
-    getline(cin, userAnswer); // Get the user's answer
-
-    // Check if the answer is correct (case-insensitive)
-    transform(userAnswer.begin(), userAnswer.end(), userAnswer.begin(), ::tolower);
-    if (userAnswer == riddles[randomIndex][1]) {
-        cout << "Correct! Well done!\n";
-    } else {
-        cout << "Wrong! The correct answer was: " << riddles[randomIndex][1] << ".\n";
     }
+    return true;
 }
-// Function to play "Guess the Teacher" game
-void guessTeacherGame() {
-    const int MAX_TEACHERS = 100; // Maximum number of teacher names
-    string teachers[MAX_TEACHERS]; // Array to store teacher names
-    int teacherCount = 0; // Counter for the number of teachers
 
-    // Open the file containing the list of teachers
-    ifstream file("teachers_list.txt");
+// Function to validate the email (should contain @gmail.com)
+bool isValidEmail(const string &email) {
+    return email.find("@gmail.com") != string::npos;
+}
 
-    // Check if the file was successfully opened
-    if (!file.is_open()) {
-        cerr << "Error opening teachers list file." << endl;
+// Function to validate the phone number (should contain only digits)
+bool isValidPhone(const string &phone) {
+    for (char ch : phone) {
+        if (!isdigit(ch)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Function to collect and validate user information
+void collectUserInfo(User &userInfo) {
+    cin.ignore(); // Clear input buffer
+    cout << "\nPlease enter your details:\n";
+
+    // Name input and validation
+    do {
+        cout << "Name: ";
+        getline(cin, userInfo.name);
+        if (!isValidName(userInfo.name)) {
+            cout << "Invalid name! Name should only contain alphabets.\n";
+        }
+    } while (!isValidName(userInfo.name));
+
+    // Email input and validation
+    do {
+        cout << "Email: ";
+        getline(cin, userInfo.email);
+        if (!isValidEmail(userInfo.email)) {
+            cout << "Invalid email! Please enter a valid Gmail address.\n";
+        }
+    } while (!isValidEmail(userInfo.email));
+
+    // Phone input and validation
+    do {
+        cout << "Phone: ";
+        getline(cin, userInfo.phone);
+        if (!isValidPhone(userInfo.phone)) {
+            cout << "Invalid phone number! Phone should contain only digits.\n";
+        }
+    } while (!isValidPhone(userInfo.phone));
+
+    // Address input and validation
+    do {
+        cout << "Address: ";
+        getline(cin, userInfo.address);
+        if (userInfo.address.empty()) {
+            cout << "Address cannot be empty!\n";
+        }
+    } while (userInfo.address.empty());
+}
+
+// Function to load riddles from a file into arrays
+int loadRiddles(const string &filename, string riddles[], string answers[], int maxRiddles) {
+    ifstream file(filename); // Use the filename provided
+    if (!file) {
+        cerr << "Error opening file!" << endl;
+        return 0;
+    }
+
+    int count = 0;
+    string line;
+    while (getline(file, line) && count < maxRiddles) {
+        size_t delimiter = line.find('|');
+        if (delimiter != string::npos) {
+            riddles[count] = line.substr(0, delimiter);      // Extract riddle
+            answers[count] = line.substr(delimiter + 1);    // Extract answer
+            count++;
+        }
+    }
+    file.close();
+    return count; // Return the total number of riddles loaded
+}
+
+// Function to play the riddles game
+void playRiddlesGame(string riddles[], string answers[], int totalRiddles) {
+    if (totalRiddles == 0) {
+        cout << "No riddles available in the file!" << endl;
         return;
     }
 
-    // Read teacher names into the array from the file
-    while (getline(file, teachers[teacherCount]) && teacherCount < MAX_TEACHERS) {
-        teacherCount++;
+    srand(time(0)); // Seed for randomness
+    char choice;
+    do {
+        int randomIndex = rand() % totalRiddles;
+
+        cout << "\nRiddle: " << riddles[randomIndex] << endl;
+        cout << "Your Answer: ";
+        string userAnswer;
+        getline(cin, userAnswer);
+
+        if (userAnswer == answers[randomIndex]) {
+            cout << "Correct!" << endl;
+        } else {
+            cout << "Wrong! The correct answer was: " << answers[randomIndex] << endl;
+        }
+
+        cout << "\nPress 'q' to quit or any other key to continue: ";
+        cin >> choice;
+        cin.ignore(); // Clear the input buffer
+    } while (choice != 'q');
+      cout << "Thank you for playing ! your order will be there soon ." ;
+}
+
+// Function to load hints and answers from the file
+int loadTeachers(const string &filename, string hints[], string answers[], int maxTeachers) {
+    ifstream file(filename);
+    if (!file) {
+        cerr << "Error opening file!" << endl;
+        return 0;
     }
 
-    file.close(); // Close the file after reading
-
-    // Check if the file contained any teacher names
-    if (teacherCount == 0) {
-        cout << "No teachers found in the list!" << endl;
-        return;
+    int count = 0;
+    string hint, answer;
+    while (count < maxTeachers && getline(file, hint) && getline(file, answer)) {
+        hints[count] = hint;   // Store the hint
+        answers[count] = answer; // Store the corresponding answer
+        count++;
     }
+    file.close();
+    return count; // Return the number of hints loaded
+}
 
-    // Select a random teacher from the list
-    srand(time(0));
-    int randomIndex = rand() % teacherCount;
+void playTeachersGame(string hints[], string answers[], int totalTeachers) {
+    srand(time(0)); // Seed random number generator
+    char choice;
+    do {
+        // Randomly select a hint
+        int randomIndex = rand() % totalTeachers;
+        cout << "Hint: " << hints[randomIndex] << endl;
+        cout << "Your guess: ";
+        string userGuess;
+        getline(cin, userGuess);
 
-    // Display the list of teachers
-    cout << "\nGuess the teacher's name from the following list:\n";
-    for (int i = 0; i < teacherCount; ++i) {
-        cout << "- " << teachers[i] << endl;
-    }
+        // Check the user's guess
+        if (userGuess == answers[randomIndex]) {
+            cout << "Correct! Well done!" << endl;
+        } else {
+            cout << "Wrong! The correct answer is: " << answers[randomIndex] << endl;
+        }
 
-    // Prompt the user for their guess
-    cout << "\nYour guess: ";
-    string guess;
-    cin >> guess;
-
-    // Check if the guess matches the randomly selected teacher's name
-    if (guess == teachers[randomIndex]) {
-        cout << "Correct! The teacher is " << teachers[randomIndex] << ".\n";
-    } else {
-        cout << "Wrong! The teacher was " << teachers[randomIndex] << ".\n";
-    }
-
-    //  questions related to subjects
-    cout << "\nLet's test your knowledge of the teachers:\n";
-
-    cout << "1. This teacher is a wizard of OOP, often teaching through real-world analogies. Who is it? ";
-    cin.ignore(); // Clear the input buffer
-    string oopAnswer;
-    getline(cin, oopAnswer);
-    if (oopAnswer == "Sir Farzeen" || oopAnswer == "sir farzeen") {
-        cout << "Correct! Sir Farzeen simplifies OOP concepts masterfully.\n";
-    } else {
-        cout << "Wrong! The correct answer is Sir Farzeen.\n";
-    }
-
-    cout << "2. Known for making ICT classes engaging with practical applications, who is this teacher? ";
-    string ictAnswer;
-    getline(cin, ictAnswer);
-    if (ictAnswer == "Miss Sania" || ictAnswer == "miss sania") {
-        cout << "Correct! Miss Sania excels in making ICT fun.\n";
-    } else {
-        cout << "Wrong! The correct answer is Miss Sania.\n";
-    }
-
-    cout << "3. This math genius often explains the trickiest calculus problems with ease. Who is it? ";
-    string mathAnswer;
-    getline(cin, mathAnswer);
-    if (mathAnswer == "Sir Imran" || mathAnswer == "sir imran") {
-        cout << "Correct! Sir Imran is a math wizard.\n";
-    } else {
-        cout << "Wrong! The correct answer is Sir Imran.\n";
-    }
-
-    cout << "4. Who introduces PF concepts with relatable examples, making coding a breeze? ";
-    string pfAnswer;
-    getline(cin, pfAnswer);
-    if (pfAnswer == "Sir Mansoor" || pfAnswer == "sir mansoor") {
-        cout << "Correct! Sir Mansoor is excellent at teaching PF.\n";
-    } else {
-        cout << "Wrong! The correct answer is Sir Mansoor.\n";
-    }
+        // Ask if the user wants to continue
+        // Ask if the user wants to continue
+        cout << "\nPress 'q' to quit or any other key to continue: ";
+        cin >> choice;
+        cin.ignore(); // Ignore the newline character after entering 'y' or 'n'
+    } while (choice != 'q');
+      cout << "Thank you for playing ! your order will be there soon ." ;
 }
 
 // Main function
 int main() {
     cout << "   Welcome to BAM Cafe   " << endl;
 
-    MenuItem menu[4] = {
-        {"Coffee", 2.5},
-        {"Tea", 1.5},
-        {"Sandwich", 4.0},
-        {"Cake", 3.0}
+    MenuItem menu[8] = {
+        {"HUNTER BEEF SANDWICH", 1590.00},
+        {"CRISPY FRIED CHICKEN BURGER", 1460.00},
+        {"FISH & CHIPS", 1540.00},
+        {"PARMESAN CRUSTED CHICKEN", 1590.00},
+        {"BABAR PASTA", 1760.00},
+        {"PASTA ALFREDO CHICKEN", 1520.00},
+        {"PIZZA MARGARITA", 1540.00},
+        {"BAM SPECIAL CHICKEN", 1590.00}
     };
     int menuSize = sizeof(menu) / sizeof(menu[0]);
 
@@ -202,90 +254,101 @@ int main() {
     MenuItem order[10]; // Array to store a maximum of 10 ordered items
     int orderSize = 0;
 
-    // Place the order
-    double total = placeOrder(menu, menuSize, order, orderSize);
+    // File name for storing orders and customer info
+    string fileName = "orders.txt";
 
-    // Display the order summary
+    // Place the order
+    double total = placeOrder(menu, menuSize, order, orderSize, fileName);
+
+    // Collect customer information
     if (total > 0) {
+        User customer;
+        collectUserInfo(customer);
+
+        // Save customer info to the file
+        ofstream outFile(fileName, ios::app); // Open file in append mode
+        if (outFile.is_open()) {
+            outFile << "\n--- Customer Information ---\n";
+            outFile << "Name: " << customer.name << "\n";
+            outFile << "Email: " << customer.email << "\n";
+            outFile << "Phone: " << customer.phone << "\n";
+            outFile << "Address: " << customer.address << "\n";
+            outFile.close();
+            cout << "Details saved successfully.\n";
+        } else {
+            cout << "Error saving customer details to the file.\n";
+        }
+
+        // Display order summary
         cout << "\nOrder Summary:\n";
         for (int i = 0; i < orderSize; ++i) {
-            cout << "- " << order[i].name << " - $" << order[i].price << "\n";
+            cout << order[i].name << " - $" << order[i].price << "\n";
         }
         cout << "Total: $" << total << "\n";
+        cout << "\nYour Order will take approx 45 Minutes !\n" ;
+        cout << "Would you like to Play Games in the mean time,\n ";
+        cout << "If yes you can choose from the following options ..." ;
     } else {
-        cout << "No items ordered.\n";
+        cout << "No order placed.\n";
     }
-    
-    // Game options
+
      // Main menu options
-    // Variables to store user details
-    string name, email, phone, address;
+    cout << "\nWelcome to the Fun Games Menu of BAM cafe\n";
+    cout << "1. Play the Riddles Game\n";
+    cout << "2. Play the Guess the Teacher Game\n";
+    cout << "3. Exit\n";
+    cout << "Choose an option (1-3): ";
 
-    // Display the menu for the user to choose a game
-    cout << "Welcome to the Fun Games Menu of BAM cafe\n";
-    cout << "1. Place Order and Provide Details\n";
-    cout << "2. Play the Riddles Game\n";
-    cout << "3. Play the Guess the Teacher Game\n";
-    cout << "4. Exit\n";
-    cout << "Choose an option (1-4): ";
-
-    int choice;
-    cin >> choice;
-    cin.ignore(); // Clear the input buffer after reading the choice
-
-    // Handle the user's choice
-   switch (choice) {
-    case 1: {
-        // Collect user information
-    collectUserInfo(name, email, phone, address);
-
-     // Display a thank-you message
-    cout << "\nThank you, " << name << "! Your order has been placed successfully.\n";
-    cout << "We will deliver it to " << address << ".\n";
-
-        // Ask if the user wants to play a game while waiting
-    cout << "\nWould you like to play a game while your order is being prepared? (yes/no): ";
-    string playGame;
-    cin.ignore(); // Clear the input buffer
-    getline(cin, playGame);
-
-       // If the user wants to play a game
-    if (playGame == "yes" || playGame == "Yes") {
-    cout << "\nWhich game would you like to play?\n";
-    cout << "1. Riddles Game\n";
-    cout << "2. Guess the Teacher Game\n";
-    cout << "Choose an option (1-2): ";
-
-    int gameChoice;
-    cin >> gameChoice;
+    int menuChoice;
+    cin >> menuChoice;
     cin.ignore(); // Clear the input buffer
 
-    if (gameChoice == 1) {
-    riddlesGame(); // Call the riddles game function
-    } else if (gameChoice == 2) {
-      guessTeacherGame(); // Call the guess the teacher game function
-    } else {
-    cout << "Invalid choice! Returning to the main menu.\n";
+    switch(menuChoice) {
+
+        case 1: {
+            const int MAX_RIDDLES = 100; // Set a maximum limit for riddles
+            string riddles[MAX_RIDDLES];
+            string answers[MAX_RIDDLES];
+
+            string filename = "riddles.txt";
+            int totalRiddles = loadRiddles(filename, riddles, answers, MAX_RIDDLES);
+
+            if (totalRiddles > 0) {
+                playRiddlesGame(riddles, answers, totalRiddles);
+            } else {
+                cout << "Failed to load riddles from the file." << endl;
+            }
+            break;
+        }
+
+        case 2: {
+            const int MAX_TEACHERS = 100;
+            string hints[MAX_TEACHERS];
+            string answers[MAX_TEACHERS];
+
+            int totalTeachers = loadTeachers("teachers.txt", hints, answers, MAX_TEACHERS);
+            if (totalTeachers == 0) {
+                cout << "No hints loaded. Exiting program." << endl;
+                return 1;
+            }
+
+            cout << "Welcome to the Guess the Teacher Game!" << endl;
+            playTeachersGame(hints, answers, totalTeachers);
+
+            cout << "Thank you for playing!" << endl;
+            cout << "Thank you for ordering from BAM Cafe." << endl;
+            break;
+        }
+
+        case 3:
+            cout << "------ Thank you for visiting BAM ------";
+            break;
+
+        default:
+            cout << "Invalid choice! Please select a valid option.\n";
     }
-    } else {
-    cout << "\n====== Alright, enjoy your time ======\n";
-    }
-        break;
-    }
-    case 2: {
-        riddlesGame(); // Call the riddles game function
-        break;
-    }
-    case 3: {
-        guessTeacherGame(); // Call the guess the teacher game function
-        break;
-    }
-    case 4:
-        cout << "------ Thank you for visiting BAM ------";
-        break;
-    default:
-        cout << "Invalid choice! Please select a valid option.\n";
-        
+
+    return 0; // End of main function
 }
-return 0;
-}
+
+
