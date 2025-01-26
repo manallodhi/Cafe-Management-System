@@ -120,3 +120,14 @@ Name: Haya Suleiman
 Email: sulaimanuncle@gmail.com
 Phone: 0776655433222
 Address: jannat ke pattey
+
+Order placed:
+BAM SPECIAL CHICKEN - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: Omaima 
+Email: khan@gmail.com
+Phone: 09876543321
+Address: world

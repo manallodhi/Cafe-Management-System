@@ -224,14 +224,13 @@ void playTeachersGame(string hints[], string answers[], int totalTeachers) {
         }
 
         // Ask if the user wants to continue
-        cout << "Do you want to try another hint? (y/n): ";
+        // Ask if the user wants to continue
+        cout << "\nPress 'q' to quit or any other key to continue: ";
         cin >> choice;
         cin.ignore(); // Ignore the newline character after entering 'y' or 'n'
-    } while (choice == 'y' || choice == 'Y');
-    while (choice != 'q');
+    } while (choice != 'q');
       cout << "Thank you for playing ! your order will be there soon ." ;
 }
-
 
 // Main function
 int main() {
