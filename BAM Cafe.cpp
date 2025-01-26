@@ -4,6 +4,8 @@
 #include <fstream>
 #include <cstdlib>   // Provides std::srand and std::rand
 #include <algorithm> // For std::random_shuffle
+#include <cctype>  // For isalpha
+#include <string>  // For std::string
 using namespace std;
 
 // Struct for Menu Item
@@ -48,7 +50,33 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
         cout << menu[choice - 1].name << " added to your order.\n";
         orderSize++;
     }
+    
+    // Define the Order structure
+struct Order {
+    std::string name;
+    double price;
+};
 
+// Function to save the order to a file
+double saveOrderToFile(const std::string &fileName, const Order order[], int orderSize, double total){
+    std::ofstream file(fileName.c_str(), std::ios::app); // Use .c_str() for C++98 compatibility
+    if (file.is_open()) {
+        file << "Order placed:\n";
+        for (int i = 0; i < orderSize; i++) {
+            file << order[i].name << " - $" << order[i].price << "\n";
+        }
+        file << "Total: $" << total << "\n";
+        file << "---------------------\n";
+        file.close();
+        std::cout << "\nOrder saved to " << fileName << "!\n";
+    } else {
+        std::cout << "\nError: Unable to open the file to save the order.\n";
+    }
+
+    return total;
+}
+
+/*
     // Save the order to a file
     ofstream file(fileName, ios::app); // Append mode
     if (file.is_open()) {
@@ -65,17 +93,38 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
     }
 
     return total;
-}
+} */
 
 
-// Function to validate the name (only alphabets and spaces)
+
+/* Function to validate the name (only alphabets and spaces)
 bool isValidName(const string &name) {
+<<<<<<< HEAD
+	for (size_t i = 0; i < container.size(); ++i) {
+    auto& item = container[i];
+    
+
+        if (!isalpha(ch) && ch != ' ') {
+            return false; 
+        }
+=======
     for (size_t i = 0; i < name.size(); i++) {
     if (!isalpha(name[i]) && name[i] != ' ') {
         return false;
+>>>>>>> 6ae10162d8cc1437ac0e726d26cd126a0cdf309c
     }
 }
     return true;
+} */
+
+bool isValidName(const std::string &name) {
+    for (size_t i = 0; i < name.size(); ++i) {  // Iterate over the string 'name'
+        char ch = name[i];                     // Get each character in the string
+        if (!isalpha(ch) && ch != ' ') {       // Check if it is not an alphabet or space
+            return false;                      // Return false for invalid characters
+        }
+    }
+    return true;  // Return true if all characters are valid
 }
 
 // Function to validate the email (should contain @gmail.com)
@@ -83,7 +132,7 @@ bool isValidEmail(const string &email) {
     return email.find("@gmail.com") != string::npos;
 }
 
-// Function to validate the phone number (should contain only digits)
+/* // Function to validate the phone number (should contain only digits)
 bool isValidPhone(const string &phone) {
     for (char ch : phone) {
         if (!isdigit(ch)) {
@@ -91,6 +140,16 @@ bool isValidPhone(const string &phone) {
         }
     }
     return true;
+} */
+
+bool isValidPhone(const std::string &phone) {
+    for (size_t i = 0; i < phone.size(); ++i) {
+        char ch = phone[i];  // Access each character by index
+        if (!isdigit(ch)) {
+            return false;    // Invalid if it contains non-digit characters
+        }
+    }
+    return true;  // Return true if all characters are digits
 }
 
 // Function to collect and validate user information
@@ -240,7 +299,7 @@ void playTeachersGame(string hints[], string answers[], int totalTeachers) {
 }
 
 
-// Main function
+/*// Main function
 int main() {
     cout << "   Welcome to BAM Cafe   " << endl;
 
@@ -353,5 +412,116 @@ int main() {
     }
 
     return 0;
-}
+} */
+
+int main() {
+    cout << "   Welcome to BAM Cafe   " << endl;
+
+    MenuItem menu[4] = {
+        {"Coffee", 2.5},
+        {"Tea", 1.5},
+        {"Sandwich", 4.0},
+        {"Cake", 3.0}
+    };
+    int menuSize = sizeof(menu) / sizeof(menu[0]);
+
+    // Display the menu
+    displayMenu(menu, menuSize);
+
+    MenuItem order[10]; // Array to store a maximum of 10 ordered items
+    int orderSize = 0;
+
+    // File name for storing orders and customer info
+    string fileName = "orders.txt";
+
+    // Place the order
+    double total = placeOrder(menu, menuSize, order, orderSize, fileName);
+
+    // Collect customer information
+    if (total > 0) {
+        User customer;
+        collectUserInfo(customer);
+
+        // Save customer info to the file
+        ofstream outFile(fileName, ios::app); // Open file in append mode
+        if (outFile.is_open()) {
+            outFile << "\n--- Customer Information ---\n";
+            outFile << "Name: " << customer.name << "\n";
+            outFile << "Email: " << customer.email << "\n";
+            outFile << "Phone: " << customer.phone << "\n";
+            outFile << "Address: " << customer.address << "\n";
+            outFile.close();
+            cout << "Customer details saved successfully.\n";
+        } else {
+            cout << "Error saving customer details to the file.\n";
+        }
+
+        // Display order summary
+        cout << "\nOrder Summary:\n";
+        for (int i = 0; i < orderSize; i++) { // Standard for loop for compatibility
+            cout << "- " << order[i].name << " - $" << order[i].price << "\n";
+        }
+        cout << "Total: $" << total << "\n";
+    } else {
+        cout << "No items ordered.\n";
+    }
+
+    // Main menu options
+    cout << "\nWelcome to the Fun Games Menu of BAM cafe\n";
+    cout << "1. Play the Riddles Game\n";
+    cout << "2. Play the Guess the Teacher Game\n";
+    cout << "3. Exit\n";
+    cout << "Choose an option (1-3): ";
+
+    int menuChoice;
+    cin >> menuChoice;
+    cin.ignore(); // Clear the input buffer
+
+    switch(menuChoice) {
+
+        case 1: {
+            const int MAX_RIDDLES = 100; // Set a maximum limit for riddles
+            string riddles[MAX_RIDDLES];
+            string answers[MAX_RIDDLES];
+
+            string filename = "riddles.txt";
+            int totalRiddles = loadRiddles(filename, riddles, answers, MAX_RIDDLES);
+
+            if (totalRiddles > 0) {
+                playRiddlesGame(riddles, answers, totalRiddles);
+            } else {
+                cout << "Failed to load riddles from the file." << endl;
+            }
+            break;
+        }
+
+        case 2: {
+            const int MAX_TEACHERS = 100;
+            string hints[MAX_TEACHERS];
+            string answers[MAX_TEACHERS];
+
+            int totalTeachers = loadTeachers("teachers.txt", hints, answers, MAX_TEACHERS);
+            if (totalTeachers == 0) {
+                cout << "No hints loaded. Exiting program." << endl;
+                return 1;
+            }
+
+            cout << "Welcome to the Guess the Teacher Game!" << endl;
+            playTeachersGame(hints, answers, totalTeachers);
+
+            cout << "Thank you for playing!" << endl;
+            cout << "Thank you for ordering from BAM Cafe." << endl;
+            break;
+        }
+
+        case 3:
+            cout << "------ Thank you for visiting BAM ------";
+            break;
+
+        default:
+            cout << "Invalid choice! Please select a valid option.\n";
+    }
+
+    return 0; // End of main function
+} // Closing brace for main()
 
