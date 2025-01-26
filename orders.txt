@@ -131,3 +131,57 @@ Name: Omaima
 Email: khan@gmail.com
 Phone: 09876543321
 Address: world
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+CRISPY FRIED CHICKEN BURGER - $1460
+FISH & CHIPS - $1540
+Total: $4590
+---------------------
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+CRISPY FRIED CHICKEN BURGER - $1460
+FISH & CHIPS - $1540
+PARMESAN CRUSTED CHICKEN - $1590
+BABAR PASTA - $1760
+PASTA ALFREDO CHICKEN - $1520
+PIZZA MARGARITA - $1540
+BAM SPECIAL CHICKEN - $1590
+Total: $12590
+---------------------
+
+--- Customer Information ---
+Name: ina nawal
+Email: juicepilado@gmail.com
+Phone: 75454346776898
+Address: h
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: manal
+Email: lod@gmail.com
+Phone: 09876543
+Address: world
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+HUNTER BEEF SANDWICH - $1590
+HUNTER BEEF SANDWICH - $1590
+HUNTER BEEF SANDWICH - $1590
+HUNTER BEEF SANDWICH - $1590
+HUNTER BEEF SANDWICH - $1590
+HUNTER BEEF SANDWICH - $1590
+HUNTER BEEF SANDWICH - $1590
+Total: $12720
+---------------------
+
+--- Customer Information ---
+Name: ftyhvffgt
+Email: inawasad@gmail.com
+Phone: 5675867768798890098765432
+Address: vgdfyfujvhjfut
