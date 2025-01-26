@@ -42,6 +42,23 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
     }
     return total;
 }
+void collectUserInfo(string &name, string &email, string &phone, string &address) {
+    do {
+        cout << "\nPlease enter your details:\n";
+        cout << "Name: ";
+        getline(cin, name);
+        cout << "Email: ";
+        getline(cin, email);
+        cout << "Phone: ";
+        getline(cin, phone);
+        cout << "Address: ";
+        getline(cin, address);
+
+        if (name.empty() || email.empty() || phone.empty() || address.empty()) {
+            cout << "\nAll fields are required! Please fill in all the information.\n";
+        }
+    } while (name.empty() || email.empty() || phone.empty() || address.empty());
+}
 
 // Function to play a riddles guessing game
 void riddlesGame() {
@@ -65,6 +82,7 @@ void riddlesGame() {
     cout << "\nRiddle: " << riddles[randomIndex][0] << endl;
     cout << "Your answer: ";
     string userAnswer;
+    cin.ignore();
     getline(cin, userAnswer); // Get the user's answer
 
     // Check if the answer is correct (case-insensitive)
@@ -197,28 +215,77 @@ int main() {
     } else {
         cout << "No items ordered.\n";
     }
-
+    
     // Game options
      // Main menu options
+    // Variables to store user details
+    string name, email, phone, address;
+
+    // Display the menu for the user to choose a game
+    cout << "Welcome to the Fun Games Menu of BAM cafe\n";
+    cout << "1. Place Order and Provide Details\n";
+    cout << "2. Play the Riddles Game\n";
+    cout << "3. Play the Guess the Teacher Game\n";
+    cout << "4. Exit\n";
+    cout << "Choose an option (1-4): ";
+
     int choice;
-    do {
-        cout << "\nMain Menu:\n";
-        cout << "1. Play Guess the Teacher Game\n";
-        cout << "2. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
+    cin >> choice;
+    cin.ignore(); // Clear the input buffer after reading the choice
 
-        switch (choice) {
-            case 1:
-                guessTeacherGame();
-                break;
-            case 2:
-                cout << "Thank you for visiting BAM Cafe!\n";
-                break;
-            default:
-                cout << "Invalid choice! Please try again.\n";
+    // Handle the user's choice
+   switch (choice) {
+    case 1: {
+        // Collect user information
+        collectUserInfo(name, email, phone, address);
+
+        // Display a thank-you message
+        cout << "\nThank you, " << name << "! Your order has been placed successfully.\n";
+        cout << "We will deliver it to " << address << ".\n";
+
+        // Ask if the user wants to play a game while waiting
+        cout << "\nWould you like to play a game while your order is being prepared? (yes/no): ";
+        string playGame;
+        cin.ignore(); // Clear the input buffer
+        getline(cin, playGame);
+
+        // If the user wants to play a game
+        if (playGame == "yes" || playGame == "Yes") {
+            cout << "\nWhich game would you like to play?\n";
+            cout << "1. Riddles Game\n";
+            cout << "2. Guess the Teacher Game\n";
+            cout << "Choose an option (1-2): ";
+
+            int gameChoice;
+            cin >> gameChoice;
+            cin.ignore(); // Clear the input buffer
+
+            if (gameChoice == 1) {
+                riddlesGame(); // Call the riddles game function
+            } else if (gameChoice == 2) {
+                guessTeacherGame(); // Call the guess the teacher game function
+            } else {
+                cout << "Invalid choice! Returning to the main menu.\n";
+            }
+        } else {
+            cout << "\nAlright, enjoy your time!\n";
         }
-    } while (choice != 2);
-
-    return 0;
+        break;
+    }
+    case 2: {
+        riddlesGame(); // Call the riddles game function
+        break;
+    }
+    case 3: {
+        guessTeacherGame(); // Call the guess the teacher game function
+        break;
+    }
+    case 4:
+        cout << "Thank you for playing! Goodbye!\n";
+        break;
+    default:
+        cout << "Invalid choice! Please select a valid option.\n";
+        
+}
+return 0;
 }
