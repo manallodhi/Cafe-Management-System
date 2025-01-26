@@ -75,35 +75,36 @@ void riddlesGame() {
         cout << "Wrong! The correct answer was: " << riddles[randomIndex][1] << ".\n";
     }
 }
-
-
-// Function to play "Guess the Teacher"
+// Function to play "Guess the Teacher" game
 void guessTeacherGame() {
     const int MAX_TEACHERS = 100; // Maximum number of teacher names
-    string teachers[MAX_TEACHERS];
-    int teacherCount = 0;
+    string teachers[MAX_TEACHERS]; // Array to store teacher names
+    int teacherCount = 0; // Counter for the number of teachers
 
+    // Open the file containing the list of teachers
     ifstream file("teachers_list.txt");
 
+    // Check if the file was successfully opened
     if (!file.is_open()) {
         cerr << "Error opening teachers list file." << endl;
         return;
     }
 
-    // Read teacher names into the array
+    // Read teacher names into the array from the file
     while (getline(file, teachers[teacherCount]) && teacherCount < MAX_TEACHERS) {
         teacherCount++;
     }
 
-    file.close();
+    file.close(); // Close the file after reading
 
+    // Check if the file contained any teacher names
     if (teacherCount == 0) {
         cout << "No teachers found in the list!" << endl;
         return;
     }
 
-    // Select a random teacher
-    srand(time(0)); // Seed the random number generator
+    // Select a random teacher from the list
+    srand(time(0));
     int randomIndex = rand() % teacherCount;
 
     // Display the list of teachers
@@ -112,16 +113,56 @@ void guessTeacherGame() {
         cout << "- " << teachers[i] << endl;
     }
 
-    // Prompt user for a guess
+    // Prompt the user for their guess
+    cout << "\nYour guess: ";
     string guess;
-    cout << "Your guess: ";
     cin >> guess;
 
-    // Check if the guess is correct
+    // Check if the guess matches the randomly selected teacher's name
     if (guess == teachers[randomIndex]) {
         cout << "Correct! The teacher is " << teachers[randomIndex] << ".\n";
     } else {
         cout << "Wrong! The teacher was " << teachers[randomIndex] << ".\n";
+    }
+
+    //  questions related to subjects
+    cout << "\nLet's test your knowledge of the teachers:\n";
+
+    cout << "1. This teacher is a wizard of OOP, often teaching through real-world analogies. Who is it? ";
+    cin.ignore(); // Clear the input buffer
+    string oopAnswer;
+    getline(cin, oopAnswer);
+    if (oopAnswer == "Sir Farzeen" || oopAnswer == "sir farzeen") {
+        cout << "Correct! Sir Farzeen simplifies OOP concepts masterfully.\n";
+    } else {
+        cout << "Wrong! The correct answer is Sir Farzeen.\n";
+    }
+
+    cout << "2. Known for making ICT classes engaging with practical applications, who is this teacher? ";
+    string ictAnswer;
+    getline(cin, ictAnswer);
+    if (ictAnswer == "Miss Sania" || ictAnswer == "miss sania") {
+        cout << "Correct! Miss Sania excels in making ICT fun.\n";
+    } else {
+        cout << "Wrong! The correct answer is Miss Sania.\n";
+    }
+
+    cout << "3. This math genius often explains the trickiest calculus problems with ease. Who is it? ";
+    string mathAnswer;
+    getline(cin, mathAnswer);
+    if (mathAnswer == "Sir Imran" || mathAnswer == "sir imran") {
+        cout << "Correct! Sir Imran is a math wizard.\n";
+    } else {
+        cout << "Wrong! The correct answer is Sir Imran.\n";
+    }
+
+    cout << "4. Who introduces PF concepts with relatable examples, making coding a breeze? ";
+    string pfAnswer;
+    getline(cin, pfAnswer);
+    if (pfAnswer == "Sir Mansoor" || pfAnswer == "sir mansoor") {
+        cout << "Correct! Sir Mansoor is excellent at teaching PF.\n";
+    } else {
+        cout << "Wrong! The correct answer is Sir Mansoor.\n";
     }
 }
 
