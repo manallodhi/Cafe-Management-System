@@ -59,7 +59,7 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
         file << "Total: $" << total << "\n";
         file << "---------------------\n";
         file.close();
-        cout << "\nOrder saved to " << fileName << "!\n";
+        cout << "\nOrder saved !\n";
     } else {
         cout << "\nError: Unable to open the file to save the order.\n";
     }
@@ -183,6 +183,7 @@ void playRiddlesGame(string riddles[], string answers[], int totalRiddles) {
         cin >> choice;
         cin.ignore(); // Clear the input buffer
     } while (choice != 'q');
+      cout << "Thank you for playing ! your order will be there soon ." ;
 }
 
 // Function to load hints and answers from the file
@@ -227,7 +228,10 @@ void playTeachersGame(string hints[], string answers[], int totalTeachers) {
         cin >> choice;
         cin.ignore(); // Ignore the newline character after entering 'y' or 'n'
     } while (choice == 'y' || choice == 'Y');
+    while (choice != 'q');
+      cout << "Thank you for playing ! your order will be there soon ." ;
 }
+
 
 // Main function
 int main() {
@@ -271,7 +275,7 @@ int main() {
             outFile << "Phone: " << customer.phone << "\n";
             outFile << "Address: " << customer.address << "\n";
             outFile.close();
-            cout << "Customer details saved successfully.\n";
+            cout << "Details saved successfully.\n";
         } else {
             cout << "Error saving customer details to the file.\n";
         }
@@ -282,6 +286,9 @@ int main() {
             cout << order[i].name << " - $" << order[i].price << "\n";
         }
         cout << "Total: $" << total << "\n";
+        cout << "\nYour Order will take approx 45 Minutes !\n" ;
+        cout << "Would you like to Play Games in the mean time,\n ";
+        cout << "If yes you can choose from the following options ..." ;
     } else {
         cout << "No order placed.\n";
     }

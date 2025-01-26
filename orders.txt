@@ -84,3 +84,39 @@ Name: Manal Lodhi
 Email: lokkis5@gmail.com
 Phone: 03457899543
 Address: imaginary world habibi
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+CRISPY FRIED CHICKEN BURGER - $1460
+Total: $3050
+---------------------
+
+--- Customer Information ---
+Name: Manal Lodhi
+Email: khajoor@gmail.com
+Phone: 023456789
+Address: crying in corner house 4
+
+Order placed:
+CRISPY FRIED CHICKEN BURGER - $1460
+BAM SPECIAL CHICKEN - $1590
+Total: $3050
+---------------------
+
+--- Customer Information ---
+Name: Haya Suleiman
+Email: sulaimansshaya@gmail.com
+Phone: 0123445677888
+Address: in jannat ke pattey
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+BAM SPECIAL CHICKEN - $1590
+Total: $3180
+---------------------
+
+--- Customer Information ---
+Name: Haya Suleiman
+Email: sulaimanuncle@gmail.com
+Phone: 0776655433222
+Address: jannat ke pattey
