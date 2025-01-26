@@ -4,6 +4,8 @@
 #include <fstream>
 #include <cstdlib>   // Provides std::srand and std::rand
 #include <algorithm> // For std::random_shuffle
+#include <cctype>  // For isalpha
+#include <string>  // For std::string
 using namespace std;
 
 // Struct for Menu Item
@@ -52,14 +54,27 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
 }
 
 
-// Function to validate the name (only alphabets and spaces)
+/* Function to validate the name (only alphabets and spaces)
 bool isValidName(const string &name) {
-    for (char ch : name) {
+	for (size_t i = 0; i < container.size(); ++i) {
+    auto& item = container[i];
+    
+
         if (!isalpha(ch) && ch != ' ') {
-            return false;  // Invalid if it contains anything other than letters or spaces
+            return false; 
         }
     }
     return true;
+} */
+
+bool isValidName(const std::string &name) {
+    for (size_t i = 0; i < name.size(); ++i) {  // Iterate over the string 'name'
+        char ch = name[i];                     // Get each character in the string
+        if (!isalpha(ch) && ch != ' ') {       // Check if it is not an alphabet or space
+            return false;                      // Return false for invalid characters
+        }
+    }
+    return true;  // Return true if all characters are valid
 }
 
 // Function to validate the email (should contain @gmail.com)
@@ -67,7 +82,7 @@ bool isValidEmail(const string &email) {
     return email.find("@gmail.com") != string::npos;
 }
 
-// Function to validate the phone number (should contain only digits)
+/* // Function to validate the phone number (should contain only digits)
 bool isValidPhone(const string &phone) {
     for (char ch : phone) {
         if (!isdigit(ch)) {
@@ -75,6 +90,16 @@ bool isValidPhone(const string &phone) {
         }
     }
     return true;
+} */
+
+bool isValidPhone(const std::string &phone) {
+    for (size_t i = 0; i < phone.size(); ++i) {
+        char ch = phone[i];  // Access each character by index
+        if (!isdigit(ch)) {
+            return false;    // Invalid if it contains non-digit characters
+        }
+    }
+    return true;  // Return true if all characters are digits
 }
 
 // Function to collect and validate user information
