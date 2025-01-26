@@ -244,11 +244,15 @@ void playTeachersGame(string hints[], string answers[], int totalTeachers) {
 int main() {
     cout << "   Welcome to BAM Cafe   " << endl;
 
-    MenuItem menu[4] = {
-        {"Coffee", 2.5},
-        {"Tea", 1.5},
-        {"Sandwich", 4.0},
-        {"Cake", 3.0}
+    MenuItem menu[9] = {
+        {"HUNTER BEEF SANDWICH", 1,590.00},
+        {"CRISPY FRIED CHICKEN BURGER", 1,460.00},
+        {"FISH & CHIPS", 1,540.00},
+        {"PARMESAN CRUSTED CHICKEN", 1,590.00},
+        {"BABAR PASTA", 1,760.00},
+        {"PASTA ALFREDO CHICKEN", 1,520.00},
+        {"PIZZA MARGARITA", 1,540.00},
+        {"BAM SPECIAL CHICKEN", 1,590.00},
     };
     int menuSize = sizeof(menu) / sizeof(menu[0]);
 
