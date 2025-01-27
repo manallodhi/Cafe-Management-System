@@ -24,7 +24,9 @@ struct User {
 // Function to display the menu
 void displayMenu(MenuItem menu[], int size) {
     cout << "\n--- Menu ---\n";
+    // Loop through each menu item
     for (int i = 0; i < size; ++i) {
+    // Display item number, name, and price	
         cout << i + 1 << ". " << menu[i].name << " - $" << menu[i].price << "\n";
     }
     cout << endl;
@@ -32,11 +34,12 @@ void displayMenu(MenuItem menu[], int size) {
 
 // Function to handle order placement and save it to a file
 double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSize, const string &fileName) {
-    int choice;
+    int choice; 
     double total = 0.0;
     orderSize = 0;
 
     cout << "\nPlace your order (Enter 0 to finish):\n";
+    // Use a while loop here for indefinite iteration since we allow the user to keep adding items until they enter 0
     while (true) {
         try {
             cout << "Enter your choice: ";
@@ -47,21 +50,21 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
                 throw invalid_argument("Invalid input! Please enter a number.");
             }
 
-            if (choice == 0) break;
-
-            if (choice < 1 || choice > menuSize) {
+            if (choice == 0) break;// Exit the loop when user enters 0 to finish ordering
+           
+            if (choice < 1 || choice > menuSize) { // Ensure choice is within valid range
                 cout << "Invalid choice! Try again.\n";
-                continue;
+                continue;// Skip the current iteration and prompt again
             }
 
             // Add the item to the order
-            order[orderSize] = menu[choice - 1];
-            total += menu[choice - 1].price;
+            order[orderSize] = menu[choice - 1];// Store the menu item in the order array
+            total += menu[choice - 1].price;// Add item price to the total
             cout << menu[choice - 1].name << " added to your order.\n";
-            orderSize++;
+            orderSize++;// Increment the order size
 
         } catch (const invalid_argument &e) {
-            // Handle invalid input
+            // Handle exceptions for invalid input
             cout << e.what() << endl;
             cin.clear();            // Clear the error flag
             cin.ignore(1000, '\n'); // Discard invalid input
@@ -70,9 +73,9 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
 
     // Save the order to a file
     ofstream file(fileName, ios::app); // Append mode
-    if (file.is_open()) {
+    if (file.is_open()) {// Check if the file is successfully opened
         file << "\nOrder placed:\n";
-        for (int i = 0; i < orderSize; i++) {
+        for (int i = 0; i < orderSize; i++) {// Write each item in the order to the file
             file << order[i].name << " - $" << order[i].price << "\n";
         }
         file << "Total: $" << total << "\n";
@@ -83,22 +86,23 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
         cout << "\nError: Unable to open the file to save the order.\n";
     }
 
-    return total;
+    return total;// Return the total price of the order
 }
 
 // Function to validate the name (only alphabets and spaces)
 bool isValidName(const string &name) {
+	// Loop through each character
     for (char ch : name) {
-        if (!isalpha(ch) && ch != ' ') {
-            return false;
+        if (!isalpha(ch) && ch != ' ') {// Check if the character is not a letter or space
+            return false;// Invalid name if any non-alphabetic character is found
         }
     }
-    return true;
+    return true;// Name is valid
 }
 
 // Function to validate the email (should contain @gmail.com)
 bool isValidEmail(const string &email) {
-    return email.find("@gmail.com") != string::npos;
+    return email.find("@gmail.com") != string::npos;// Check if email contains @gmail.com
 }
 
 // Function to validate the phone number (should start with +92 and have 13 digits)
@@ -109,13 +113,13 @@ bool isValidPhone(const string &phone) {
     }
 
     // Check if the remaining characters are all digits
-    for (size_t i = 3; i < phone.size(); ++i) {
-        if (!isdigit(phone[i])) {
-            return false;
+    for (size_t i = 3; i < phone.size(); ++i) {// Loop through each character
+        if (!isdigit(phone[i])) { // Check if the character is not a digit
+            return false;// Invalid if any non-digit is found
         }
     }
 
-    return true;
+    return true;// Phone number is valid
 }
 
 // Function to collect and validate user information
@@ -125,12 +129,14 @@ void collectUserInfo(User &userInfo) {
 
     // Name input and validation
     do {
-        cout << "Name: ";
-        getline(cin, userInfo.name);
-        if (!isValidName(userInfo.name)) {
+        cout << "Name: "
+        getline(cin, userInfo.name);// Get full name from user
+        if (!isValidName(userInfo.name)) {// Validate name
             cout << "Invalid name! Name should only contain alphabets.\n";
         }
-    } while (!isValidName(userInfo.name));
+    } while (!isValidName(userInfo.name));    // Repeat until a valid name is entered
+    // Repeat until a valid email is entered
+
 
     // Email input and validation
     do {
@@ -149,7 +155,7 @@ void collectUserInfo(User &userInfo) {
         if (userInfo.phone.size() != 10 || !isValidPhone(userInfo.phone)) {
             cout << "Invalid phone number!.\n";
         }
-    } while (userInfo.phone.size() != 10 || !isValidPhone(userInfo.phone));
+    } while (userInfo.phone.size() != 10 || !isValidPhone(userInfo.phone));// Repeat until a valid phone number is entered
 
 
     // Address input and validation
