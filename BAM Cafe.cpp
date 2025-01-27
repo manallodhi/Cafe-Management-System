@@ -3,10 +3,7 @@
 #include <ctime>     // Time manipulation for random number generation
 #include <fstream>   // For file operations
 #include <cstdlib>   // Provides std::srand and std::rand
-<<<<<<< HEAD
-#include <cctype>    // For isalpha and isdigit
-=======
->>>>>>> e50309906f2610d6994ce9f3a89d0018a49e143b
+
 using namespace std;
 
 // Struct for Menu Item
@@ -25,7 +22,7 @@ struct User {
 
 // Function to display the menu
 void displayMenu(MenuItem menu[], int size) {
-    cout << "\n--- Menu ---\n";
+    cout << "\n------ Menu ------\n";
     for (int i = 0; i < size; ++i) {
         cout << i + 1 << ". " << menu[i].name << " - $" << menu[i].price << "\n";
     }
@@ -237,7 +234,7 @@ void playTeachersGame(string hints[], string answers[], int totalTeachers) {
 
 // Main function
 int main() {
-    cout << "   Welcome to BAM Cafe   " << endl;
+    cout << "          Welcome to BAM Cafe          " << endl;
 
     MenuItem menu[8] = {
         {"HUNTER BEEF SANDWICH", 1590.00},
