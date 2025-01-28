@@ -1,18 +1,18 @@
-This teacher is a wizard of OOP, often teaching through real world analogies.
+This teacher is a wizard of AICT, often teaching through real world analogies.
 Sir Farzeen
 Known for making ICT classes engaging with practical applications.
 Miss Sania
 This math genius often explains the trickiest calculus problems with ease.
 Sir Imran
-Who introduces PF concepts with relatable examples, making coding a breeze?
+Who introduces PF concepts with relatable examples, making coding a breeze ?
 Sir Mansoor
-Who is the sweetest teacher, makes AICT super easy, and is leaving us for his master’s—but will always stays the best teacher of our University Life?
+Who is the sweetest teacher, makes AICT super easy, and is leaving us for his master's-but will always stays the best teacher of our University Life ?
 Sir Farzeen
-Which teacher would definitely write ‘if (student_depressed) { teacher_happy = true; }’ as their life motto?
+Which teacher would definitely write 'if (studentdepressed) { teacher_happy = true ; }' as their life motto ?
 Sir Mansoor
-Who could probably debug your entire code just by looking at it—like they have X-ray vision for syntax errors?
+Who could probably debug your entire code just by looking at it-like they have X-ray vision for syntax errors ?
 Sir Mansoor
-Which teacher is so methodical that their favorite keyword in C++ must be ‘public’—because they want all students to access knowledge?
+Which teacher is so methodical that their favorite keyword in C++ must be "public" - because they want all students to access knowledge ?
 Sir Sheeraz
 
 

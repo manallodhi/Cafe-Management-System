@@ -315,3 +315,130 @@ Name: MAnal
 Email: lodhi@gmail.com
 Phone: 3302823168
 Address: lkielood
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: Manal
+Email: l@gmail.com
+Phone: 3302823168
+Address: logic left chat
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+BAM SPECIAL CHICKEN - $1590
+Total: $3180
+---------------------
+
+--- Customer Information ---
+Name: Manal Lodhi
+Email: lodhimanal8@gmail.com
+Phone: 3302823168
+Address: near xyz park
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: manal
+Email: lodhi8@gmail.com
+Phone: 3302823168
+Address: near xyz park
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: Manal Lodhi 
+Email: lodhimanal8@gmail.com
+Phone: 3302823168
+Address: near xyz park
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: mana
+Email: lod@gmail.com
+Phone: 3302823168
+Address: near xyz
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: manal
+Email: lodhi@gmail.com
+Phone: 3302823168
+Address: near xyz
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: manal
+Email: @gmail.com
+Phone: 3302823168
+Address: near xyz

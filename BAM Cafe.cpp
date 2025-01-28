@@ -1,8 +1,8 @@
 #include <iostream>  // Handles input/output operations
 #include <string>    // For string operations
-#include <ctime>     // Time manipulation for random number generation
+#include <ctime>     // Time manipulation for random number generation srand , rand
 #include <fstream>   // For file operations
-#include <cstdlib>   // Provides std::srand and std::rand
+//#include <cstdlib>   // Provides std::srand and std::rand
 #include <algorithm> //transform keyword
 
 using namespace std;
@@ -25,7 +25,7 @@ struct User {
 void displayMenu(MenuItem menu[], int size) {
     cout << "\n--- Menu ---\n";
     // Loop through each menu item
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < size; i++) {
     // Display item number, name, and price
         cout << i + 1 << ". " << menu[i].name << " - $" << menu[i].price << "\n";
     }
@@ -81,7 +81,7 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
         file << "Total: $" << total << "\n";
         file << "---------------------\n";
         file.close();
-        cout << "\nOrder saved!\n";
+
     } else {
         cout << "\nError: Unable to open the file to save the order.\n";
     }
@@ -129,7 +129,7 @@ void collectUserInfo(User &userInfo) {
 
     // Name input and validation
     do {
-        cout << "Name: "
+        cout << "Name: " ;
         getline(cin, userInfo.name);// Get full name from user
         if (!isValidName(userInfo.name)) {// Validate name
             cout << "Invalid name! Name should only contain alphabets.\n";
@@ -337,6 +337,9 @@ int main() {
 
     // Collect customer information
     if (total > 0) {
+
+        cout << "\nOrder saved!\n";
+
         User customer;
         collectUserInfo(customer);
 
@@ -363,9 +366,7 @@ int main() {
         cout << "\nYour Order will take approx 45 Minutes !\n" ;
         cout << "Would you like to Play Games in the mean time,\n\n";
         cout << "If yes you can choose from the following options ...\n" ;
-    } else {
-        cout << "No order placed.\n";
-    }
+
 
      // Main menu options
     cout << "\nWelcome to the Fun Games Menu of BAM cafe\n\n";
@@ -420,6 +421,10 @@ int main() {
 
         default:
             cout << "Invalid choice! Please select a valid option.\n";
+    }
+     } else {
+        cout << "\nNo order placed.\n";
+        cout << "Have a nice Day ! \n" ;
     }
 
     return 0; // End of main function
