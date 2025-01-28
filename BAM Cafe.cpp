@@ -26,7 +26,7 @@ void displayMenu(MenuItem menu[], int size) {
     cout << "\n--- Menu ---\n";
     // Loop through each menu item
     for (int i = 0; i < size; ++i) {
-    // Display item number, name, and price	
+    // Display item number, name, and price
         cout << i + 1 << ". " << menu[i].name << " - $" << menu[i].price << "\n";
     }
     cout << endl;
@@ -34,7 +34,7 @@ void displayMenu(MenuItem menu[], int size) {
 
 // Function to handle order placement and save it to a file
 double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSize, const string &fileName) {
-    int choice; 
+    int choice;
     double total = 0.0;
     orderSize = 0;
 
@@ -51,7 +51,7 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
             }
 
             if (choice == 0) break;// Exit the loop when user enters 0 to finish ordering
-           
+
             if (choice < 1 || choice > menuSize) { // Ensure choice is within valid range
                 cout << "Invalid choice! Try again.\n";
                 continue;// Skip the current iteration and prompt again
@@ -424,5 +424,3 @@ int main() {
 
     return 0; // End of main function
 }
-
-
