@@ -28,7 +28,7 @@ o	Click on the Build and Run button or press F9 (in Code::Blocks) or use the cor
 o	The program will display its output in the console window that opens after you run it.</br></br>
 Files Included</br>
 •	program.cpp: Main C++ source file.</br>
-•	instructions.txt: [Optional file explaining additional instructions or data].</br></br>
+</br>
 Troubleshooting</br>
 •	If you get an error related to the compiler, ensure that you have the correct C++ compiler installed and configured in your IDE.</br>
 •	If the program crashes or gives incorrect output, make sure all the files are in the same folder and that there are no missing dependencies.</br>
