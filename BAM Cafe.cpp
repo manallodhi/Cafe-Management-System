@@ -63,11 +63,15 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
             cout << menu[choice - 1].name << " added to your order.\n";
             orderSize++;// Increment the order size
 
+        //&e this means catch the exception and store it in a variable e
         } catch (const invalid_argument &e) {
             // Handle exceptions for invalid input
-            cout << e.what() << endl;
+            cout << e.what() << endl;// what() returns the string that describes the error .
+            //when invalid input is made then cin goes into the error state so it basically removes cin from error state
             cin.clear();            // Clear the error flag
+            //this statement makes sure that the new choice is not effected by the previous error
             cin.ignore(1000, '\n'); // Discard invalid input
+            //this ignores any character in the input buffer until its found a new line
         }
     }
 
@@ -170,13 +174,15 @@ void collectUserInfo(User &userInfo) {
 
 
 // Function to trim leading and trailing spaces
+//const makes sure that the string is only read not altered
 string trimR(const string &str) {
+    //size_t store the index of the spaces
 	// Find the first non-space character
     size_t first = str.find_first_not_of(' ');
     // Find the last non-space character
     size_t last = str.find_last_not_of(' ');
     // Return the substring between the first and last non-space characters
-    return str.substr(first, (last - first + 1));
+    return str.substr(first, (last - first + 1)); // if the first letter is at index 2 and last is at 4 so 4-2+1=3 is the length of the string
 }
 
 // Function to convert a string to lowercase without using transform
@@ -201,7 +207,11 @@ int loadRiddles(const string &filename, string riddles[], string answers[], int 
     while (getline(file, line) && count < maxRiddles) {// Read lines until the end of file or maxRiddles is reached
         size_t delimiter = line.find('|'); // Find the position of the delimiter '|'
         if (delimiter != string::npos) { // Check if the delimiter exists
+                //this checks if the search was successfull
+
+                //extract the part before the delimeter
             riddles[count] = line.substr(0, delimiter);  // Extract the riddle part before the delimiter
+        //this will skip the dilimiter and moves one step right to the delimeter
             answers[count] = line.substr(delimiter + 1); // Extract the answer part after the delimiter
             count++;// Increment the count of riddles
         }
@@ -279,10 +289,12 @@ int loadTeachers(const string &filename, string hints[], string answers[], int m
 
 // Function to play the Teachers' Game
 void playTeachersGame(string hints[], string answers[], int totalTeachers) {
+    //this makes sure whenever you run program it will give whole other index each time
     srand(time(0)); // Seed random number generator with the current time
     char choice;
     do {
         // Randomly select a hint
+        //rand() this gives random number each time the same wnenever we run program but srand prevents this
         int randomIndex = rand() % totalTeachers;// Generate a random index for the hint
         cout << "Hint: " << hints[randomIndex] << endl;// Display the hint
         cout << "Your guess: ";
