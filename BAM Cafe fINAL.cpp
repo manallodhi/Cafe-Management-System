@@ -26,7 +26,7 @@ void displayMenu(MenuItem menu[], int size) {
 
     for (int i = 0; i < size; i++) {
 
-        cout << i + 1 << ". " << menu[i].name << " - Rs " << menu[i].price << "\n";
+        cout << i + 1 << ". " << menu[i].name << " - $" << menu[i].price << "\n";
     }
     cout << endl;
 }
@@ -52,8 +52,7 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
         continue;
     }
 
-    if (choice == 0) ;
-    break;
+    if (choice == 0) break;
     if (choice < 1 || choice > menuSize) {
         cout << "Invalid choice! Try again.\n";
         continue;
@@ -73,7 +72,7 @@ double placeOrder(MenuItem menu[], int menuSize, MenuItem order[], int &orderSiz
         for (int i = 0; i < orderSize; i++) {// Write each item in the order to the file
             file << order[i].name << " - $" << order[i].price << "\n";
         }
-        file << "Total: Rs " << total << "\n";
+        file << "Total: $" << total << "\n";
         file << "---------------------\n";
         file.close();
 
@@ -108,7 +107,7 @@ bool isValidPhone(const string &phone) {
     }
 
     // Check if the remaining characters are all digits
-    for ( size_t i = 1; i < phone.size(); ++i) {
+    for (size_t i = 3; i < phone.size(); ++i) {
         if (!isdigit(phone[i])) {
             return false;        }
     }

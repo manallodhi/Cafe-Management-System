@@ -442,3 +442,245 @@ Name: manal
 Email: @gmail.com
 Phone: 3302823168
 Address: near xyz
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+CRISPY FRIED CHICKEN BURGER - $1460
+FISH & CHIPS - $1540
+Total: $4590
+---------------------
+
+--- Customer Information ---
+Name: Haya Sulaieman
+Email: sulaiman@gmail.com
+Phone: 3302823168
+Address: jannat ke pattey
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: manal
+Email: loa@gmail.com
+Phone: 3302823168
+Address: near xyz
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: mal
+Email: @gmail.com
+Phone: 3302823168
+Address: near xyz
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: manal
+Email: loadi@gmail.com
+Phone: 3302823168
+Address: xyz
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+CRISPY FRIED CHICKEN BURGER - $1460
+Total: $3050
+---------------------
+
+--- Customer Information ---
+Name: manal
+Email: m@gmail.com
+Phone: 3368900321
+Address: salim
+
+Order placed:
+FISH & CHIPS - $1540
+Total: $1540
+---------------------
+
+--- Customer Information ---
+Name: aiman
+Email: aiman@gmail.com
+Phone: 3352205921
+Address: shu
+
+Order placed:
+CRISPY FRIED CHICKEN BURGER - $1460
+FISH & CHIPS - $1540
+Total: $3000
+---------------------
+
+--- Customer Information ---
+Name: bk
+Email: bk@gmail.com
+Phone: 3368900344
+Address: shu
+
+Order placed:
+BAM SPECIAL CHICKEN - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: bk
+Email: bk@gmail.com
+Phone: 3333333333
+Address: shu
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: bk
+Email: bk@gmail.com
+Phone: 3333333333
+Address: sghu
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: Manal Lodhi
+Email: lodhi8@gmail.com
+Phone: 3302823168
+Address: xyz
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: ma
+Email: @gmail.com
+Phone: 3302823168
+Address: xyz
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: manal
+Email: @gmail.com
+Phone: 3302823168
+Address: xyz
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: Manal
+Email: @gmail.com
+Phone: 3302823168
+Address: xyz
+
+Order placed:
+BAM SPECIAL CHICKEN - $1590
+Total: $1590
+---------------------
+
+--- Customer Information ---
+Name: manal lodhi 
+Email: lodhimanal8@gmail.com
+Phone: 3302823168
+Address: xyz house
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+Total: Rs 0
+---------------------
+
+Order placed:
+Total: Rs 0
+---------------------
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+Order placed:
+Total: $0
+---------------------
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+Total: $1590
+---------------------
+
+Order placed:
+CRISPY FRIED CHICKEN BURGER - $1460
+Total: $1460
+---------------------
+
+--- Customer Information ---
+Name: b
+Email: kbakhtawar@gmail.com
+Phone: 3333333333
+Address: hub
+
+Order placed:
+BABAR PASTA - $1760
+Total: $1760
+---------------------
+
+--- Customer Information ---
+Name: manal
+Email: bk@gmail.com2
+Phone: 3213872880
+Address: shu
+
+Order placed:
+HUNTER BEEF SANDWICH - $1590
+BAM SPECIAL CHICKEN - $1590
+Total: $3180
+---------------------
+
+--- Customer Information ---
+Name: ai sha
+Email: aisha@gmail.com
+Phone: 1234567889
+Address: shu$&
+
+Order placed:
+CRISPY FRIED CHICKEN BURGER - $1460
+FISH & CHIPS - $1540
+Total: $3000
+---------------------
+
+--- Customer Information ---
+Name: Manal Lodhi
+Email: lodhimanal8@gmail.com
+Phone: 3302823168
+Address: its not important hehehehehe
